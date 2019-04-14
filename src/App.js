@@ -4,7 +4,7 @@ import './App.css';
 
 /*global chrome*/
 // itineraries : [{}, {}...]
-const development = false;
+const development = true;
 const testData = [
   {
     flights: [
@@ -82,7 +82,9 @@ class App extends Component {
       itineraryRows.push(
         <div className='itinerary-item'>
           {flightRows}
-          <p>Total price: {this.state.itineraries[i].price}</p>
+          <div className='priceContainer'>
+            <p>Total price: {this.state.itineraries[i].price}</p>
+          </div> 
         </div>
       )
     }
@@ -96,7 +98,7 @@ class App extends Component {
             {this.renderItinerary()}
           </div>
           <div className="get-offer-container">
-            <button>Finance your vacation with a loan for ${this.getTotalPrice()}</button>
+            <button type="button" class="loan-button">Finance your vacation with a loan for ${this.getTotalPrice()}</button>
           </div>
         </div>
     );
