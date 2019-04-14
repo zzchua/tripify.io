@@ -1,0 +1,59 @@
+{
+    "env": {
+        "node": true, // this is the best starting point
+        "browser": true, // for react web
+        "es6": true // enables es6 features
+    },
+    "parser": "babel-eslint", // needed to make babel stuff work properly
+    "extends": "airbnb",
+    "rules": { 
+        "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ],
+        "arrow-body-style": 0,
+        "react/prefer-stateless-function": 0,
+        "indent": 2,
+        "no-console": 0,
+        "class-methods-use-this": 0,
+        "import/prefer-default-export": 0,
+        "jsx-quotes": ["error", "prefer-single"],
+        "linebreak-style": ["off", "windows"],
+        "global-require": 0,
+        "react/sort-comp": [2, 
+            {
+                "order": [
+                "static-methods",
+                "lifecycle",
+                "everything-else",
+                "render"
+                ],
+                "groups": {
+                "lifecycle": [
+                    "displayName",
+                    "propTypes",
+                    "contextTypes",
+                    "childContextTypes",
+                    "mixins",
+                    "statics",
+                    "defaultProps",
+                    "constructor",
+                    "getDefaultProps",
+                    "state",
+                    "getInitialState",
+                    "getChildContext",
+                    "getDerivedStateFromProps",
+                    "componentWillMount",
+                    "UNSAFE_componentWillMount",
+                    "componentDidMount",
+                    "componentWillReceiveProps",
+                    "UNSAFE_componentWillReceiveProps",
+                    "shouldComponentUpdate",
+                    "componentWillUpdate",
+                    "UNSAFE_componentWillUpdate",
+                    "getSnapshotBeforeUpdate",
+                    "componentDidUpdate",
+                    "componentDidCatch",
+                    "componentWillUnmount"
+                ]
+            }
+          }]
+    }
+}
