@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LoanApplication from './LoanApplication.js';
 
 /*global chrome*/
 // itineraries : [{}, {}...]
-const development = false;
+const development = true;
 const testData = [
   {
     flights: [
@@ -59,6 +60,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {itineraries: [], showLoanApplication: false};
+    this.onNavLoanApplication = this.onNavLoanApplication.bind(this);
   }
 
   renderItinerary() {
@@ -68,7 +70,7 @@ class App extends Component {
       const flightRows = [];
       for (let j = 0; j < flights.length; j++) {
         flightRows.push(
-          <div className='flight-item'>
+          <div className='flight-item' key={j}>
             <div className='flightContainer'>
               <div className='fromToContainer'>
                 <p className='flight-detail-line origin-line'>From: {this.state.itineraries[i].flights[j].origin}</p>
@@ -80,7 +82,7 @@ class App extends Component {
         );
       }
       itineraryRows.push(
-        <div className='itinerary-item'>
+        <div className='itinerary-item' key={i}>
           {flightRows}
           <p>Total price: {this.state.itineraries[i].price}</p>
         </div>
@@ -96,7 +98,7 @@ class App extends Component {
             {this.renderItinerary()}
           </div>
           <div className="get-offer-container">
-            <button>Finance your vacation with a loan for ${this.getTotalPrice()}</button>
+            <button onClick={this.onNavLoanApplication}>Finance your vacation with a loan for ${this.getTotalPrice()}</button>
           </div>
         </div>
     );
@@ -104,9 +106,12 @@ class App extends Component {
 
   renderLoanApplication() {
     return (
-      <div className="loan-application">
-      </div>
+      <LoanApplication totalLoanValue={this.getTotalPrice()}/>
     );
+  }
+
+  onNavLoanApplication() {
+    this.setState({showLoanApplication: true});
   }
 
   getTotalPrice() {
@@ -134,7 +139,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.itineraries);
-    if (!this.showLoanApplication) {
+    if (!this.state.showLoanApplication) {
       return this.renderMain();
     } else {
       return this.renderLoanApplication();
