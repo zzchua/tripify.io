@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 400px;
+  width: 450px;
 }
 
 .itinerary-list {
@@ -17,14 +17,20 @@ body {
   border: 1px solid black;
   margin: 5px; 
   padding: 10px;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
+}
+
+.priceContainer{
+  display: flex;
+  align-content: center
 }
 
 .fromToContainer {
   display: flex;
   flex-direction: column;
-  margin: 10;
+  margin: 5;
   flex-grow: 2;
 }
 
@@ -37,13 +43,18 @@ body {
 }
 
 .flight-detail-line {
-  font-size: 12px;
+  font-size: 15px;
+  font-family: "Times New Roman", Times, serif;
   color: blue;
   text-align: left;
 }
 
 .date-line {
-  color: green;
+  color: grey;
+}
+
+.get-offer-container{
+  color: aliceblue
 }
 
 code {

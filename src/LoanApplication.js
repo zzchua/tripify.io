@@ -92,6 +92,14 @@ export default class LoanApplication extends Component {
             onChange={this.handleInputChange} />
         </label>
         <br />
+        <label>
+          Date of birth (YYYY-MM-DD):
+          <input
+            name="dateOfBirth"
+            type="text"
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
       </form>
     );
   }

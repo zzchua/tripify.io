@@ -84,7 +84,9 @@ class App extends Component {
       itineraryRows.push(
         <div className='itinerary-item' key={i}>
           {flightRows}
-          <p>Total price: {this.state.itineraries[i].price}</p>
+          <div className='priceContainer'>
+            <p>Total price: {this.state.itineraries[i].price}</p>
+          </div> 
         </div>
       )
     }
