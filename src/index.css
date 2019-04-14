@@ -9,8 +9,14 @@ body {
   width: 300px;
 }
 
-itinerary-list {
+.itinerary-list {
   margin: 0, auto;
+}
+
+.itinerary-item {
+  border: 1px solid black;
+  margin: 5px; 
+  padding: 10px;
 }
 
 code {
