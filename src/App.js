@@ -4,7 +4,7 @@ import './App.css';
 
 /*global chrome*/
 // itineraries : [{}, {}...]
-const development = true;
+const development = false;
 const testData = [
   {
     flights: [
@@ -58,7 +58,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {itineraries: []};
+    this.state = {itineraries: [], showLoanApplication: false};
   }
 
   renderItinerary() {
@@ -82,13 +82,44 @@ class App extends Component {
       itineraryRows.push(
         <div className='itinerary-item'>
           {flightRows}
-          <p>Total price: ${this.state.itineraries[i].price}</p>
+          <p>Total price: {this.state.itineraries[i].price}</p>
         </div>
       )
     }
     return itineraryRows;
   }
-  
+
+  renderMain() {
+    return (
+      <div className="main">
+          <div className="itinerary-list">
+            {this.renderItinerary()}
+          </div>
+          <div className="get-offer-container">
+            <button>Finance your vacation with a loan for ${this.getTotalPrice()}</button>
+          </div>
+        </div>
+    );
+  }
+
+  renderLoanApplication() {
+    return (
+      <div className="loan-application">
+      </div>
+    );
+  }
+
+  getTotalPrice() {
+    let price = 0;
+    for (let i = 0; i < this.state.itineraries.length; i++) {
+      const priceString = this.state.itineraries[i].price.replace(',' ,'');
+      priceString = priceString.replace('$', '');
+      let itineraryPrice = parseFloat(priceString);
+      price += itineraryPrice;
+    }
+    return price;
+  }
+
   componentWillMount() {
     if (development) {
       this.setState({itineraries: testData});
@@ -103,13 +134,11 @@ class App extends Component {
 
   render() {
     console.log(this.state.itineraries);
-    return (
-      <div className="App">
-        <div className="itinerary-list">
-          {this.renderItinerary()}
-        </div>
-      </div>
-    );
+    if (!this.showLoanApplication) {
+      return this.renderMain();
+    } else {
+      return this.renderLoanApplication();
+    }
   }
 }
 
