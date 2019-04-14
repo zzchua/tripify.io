@@ -4,6 +4,55 @@ import './App.css';
 
 /*global chrome*/
 // itineraries : [{}, {}...]
+const development = true;
+const testData = [
+  {
+    flights: [
+      {
+        departureDate: "Tue May 14",
+        origin: "Seattle - Tacoma Intl. (SEA)",
+        destination: "Narita Intl. (NRT)"
+      },
+      {
+        departureDate: "Wed May 27",
+        origin: "Seattle - Tacoma Intl. (SEA)",
+        destination: "Seattle - Tacoma Intl. (SEA)"
+      }],
+      price: "$1000.53",
+  },
+  {
+    flights: [
+      {
+        departureDate: "Tue May 14",
+        origin: "Seattle - Tacoma Intl. (SEA)",
+        destination: "Narita Intl. (NRT)"
+      },
+      {
+        departureDate: "Wed May 27",
+        origin: "Seattle - Tacoma Intl. (SEA)",
+        destination: "Seattle - Tacoma Intl. (SEA)"
+      },
+      {
+        departureDate: "Wed May 27",
+        origin: "Seattle - Tacoma Intl. (SEA)",
+        destination: "Seattle - Tacoma Intl. (SEA)"
+      }],
+      price: "$3000.53",
+  },
+  {
+    flights: [
+      {
+        departureDate: "Tue May 14",
+        origin: "Seattle - Tacoma Intl. (SEA)",
+        destination: "Narita Intl. (NRT)"
+      },
+      {
+        departureDate: "Wed May 27",
+        origin: "Seattle - Tacoma Intl. (SEA)",
+        destination: "Seattle - Tacoma Intl. (SEA)"
+      }],
+      price: "$1000.53",
+  }];
 
 class App extends Component {
 
@@ -20,9 +69,13 @@ class App extends Component {
       for (let j = 0; j < flights.length; j++) {
         flightRows.push(
           <div className='flight-item'>
-            <p>Departure Date: {this.state.itineraries[i].flights[j].departureDate}</p>
-            <p>From: {this.state.itineraries[i].flights[j].origin}</p>
-            <p>To: {this.state.itineraries[i].flights[j].destination}</p>
+            <div className='flightContainer'>
+              <div className='fromToContainer'>
+                <p className='flight-detail-line origin-line'>From: {this.state.itineraries[i].flights[j].origin}</p>
+                <p className='flight-detail-line destination-line'>To: {this.state.itineraries[i].flights[j].destination}</p>
+              </div>
+              <p className='flight-detail-line date-line'>Departure Date: {this.state.itineraries[i].flights[j].departureDate}</p>
+            </div>
           </div>
         );
       }
@@ -35,12 +88,17 @@ class App extends Component {
     }
     return itineraryRows;
   }
-
+  
   componentWillMount() {
-    chrome.storage.local.get({itineraries: []}, (data) => {
-      const itineraries = data.itineraries;
-      this.setState({itineraries: itineraries});
-    });
+    if (development) {
+      this.setState({itineraries: testData});
+    } else {
+      chrome.storage.local.get({itineraries: []}, (data) => {
+        const itineraries = data.itineraries;
+        this.setState({itineraries: itineraries});
+      });
+    }
+    
   }
 
   render() {
